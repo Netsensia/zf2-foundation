@@ -8,9 +8,13 @@ Alternatively, you may want to install from scratch in your own skeleton applica
 
 ### Add to composer.json
 
-	"require" : {
-		"netsensia/zf2-foundation" : "dev-master"
-	},
+    "require" : {
+	"netsensia/zf2-foundation" : "dev-master"
+    }
+
+### Run Composer
+
+  php composer.phar install --dev
 
 ### Copy config files
 
