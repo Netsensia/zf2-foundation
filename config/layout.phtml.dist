@@ -1,0 +1,157 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($this->translate('Netsensia Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/brand/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                                      ->prependFile($this->basePath() . '/js/validate.min.js')
+                                      ->prependFile($this->basePath() . '/js/application.js')
+                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+
+    </head>
+    <body>
+    <div id="page-wrap">
+    <div id="main">
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Netsensia Skeleton Application') ?></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <?php
+                                if ($this->identity()) {
+                                    $urls = array(
+                                        'home' => $this->translate("Home"),
+                                        'help' => $this->translate("Help"),
+                                        'contact' => $this->translate("Contact")
+                                    );
+                                } else {
+                                    if ($this->config()['netsensia']['enable-users']) {
+                                        $urls = array(
+                                            'home' => $this->translate("Home"),
+                                            'register' => $this->translate("Register"),
+                                            'help' => $this->translate("Help"),
+                                            'contact' => $this->translate("Contact"),
+                                        );
+                                    } else {
+                                        $urls = array(
+                                            'home' => $this->translate("Home"),
+                                            'help' => $this->translate("Help"),
+                                            'contact' => $this->translate("Contact"),
+                                        );
+                                    }
+                                } 
+                            ?>
+                            <?php foreach ($urls as $url => $name) { ?>
+                            <li class="<?php echo ($this->url() == $this->url($url) ? "active" : ""); ?>"><a href="<?php echo $this->url($url); ?>"><?php echo $this->translate($name); ?></a></li>
+                            <?php } ?>
+                            <?php if ($user = $this->identity()) { ?>
+                            <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
+                            <li><a><strong><?php echo $this->translate('Logged in as'); ?> <?php echo $this->escapeHtml($user->getName()); ?></strong></a></li>
+                            <?php } ?>
+                        </ul>
+                        <?php if ($this->config()['netsensia']['enable-users'] && !$this->identity()) { ?>
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                              <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate('Sign In / Sign Up'); ?><b class="caret"></b></a>
+                              <ul class="dropdown-menu" aria-labelledby="drop3">
+                                <li>
+                                	<form method="post" action="<?php echo $this->url('login'); ?>">
+                                	<input type="text" style="margin:10px;" name="login-email" placeholder="Email"/>
+                                	<input type="password" style="margin:10px;" name="login-password" placeholder="Password"/>
+                                	<input type="checkbox" style="margin:10px;" name="remember" value="remember" /> <?php echo $this->translate('Remember Me'); ?>
+                                	<input type="submit" class="btn btn-primary" style="margin:10px;" name="submit" value="<?php echo $this->translate('Sign In'); ?>">
+                                	</form>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="<?php echo $this->url('register'); ?>"><?php echo $this->translate("Create a new account"); ?></a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="<?php echo $this->url('password-reset'); ?>"><?php echo $this->translate("Reset your password"); ?></a></li>
+                              </ul>
+                            </li>                        
+                        </ul>
+                        <?php } ?>
+                        <div id="flag-container" class="pull-right">
+                            <a title="<?php echo $this->translate('English'); ?>" href="<?php echo $this->url('locale', ["locale"=>"en_GB"]); ?>"><img class="translate-flag" src="/img/flag/England.fw.png"></a>
+                            <a title="<?php echo $this->translate('French'); ?>" href="<?php echo $this->url('locale', array("locale"=>"fr_FR")); ?>"><img class="translate-flag" src="/img/flag/France.fw.png"></a>
+                        </div>
+                   </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            
+            <?php 
+            // First get the viewmodel and all its children (ie the actions viewmodel)
+            $children = $this->viewModel()->getCurrent()->getChildren();
+            
+            $ourView  = $children[0];
+            
+            $variables = $ourView->getVariables();
+            
+            if (isset($variables['flashMessages']) && count($variables['flashMessages']) > 0) : ?>
+             <?php foreach ($variables['flashMessages'] as $fMessage) : ?>
+                <?php $alertType = 'block'; ?>
+                <?php if (preg_match('/^(.*)##(.*)$/', $fMessage, $matches)) { $fMessage = $matches[1]; $alertType = $matches[2]; } ?>
+                <div class="alert alert-<?php echo $alertType; ?>">
+                <button type="button" class="close" data-dismiss="alert">&times;</button> 
+                <?php echo $fMessage; ?>
+                </div>
+                <?php endforeach; ?>  
+            <?php endif; ?>
+                    
+            <?php echo $this->content; ?>
+        </div> <!-- /container -->
+    </div>
+    </div>        
+  
+            <footer id="footer">
+                      <div class="container">
+                       <p>&copy; 1999 - <?php echo date('Y') ?> by Netsensia Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                        <ul class="footer-links">
+                          <li><a href="<?= $this->url('home'); ?>"><?= $this->translate('Home'); ?></a></li>
+                          <li class="muted">&middot;</li>
+                          <li><a href="<?= $this->url('contact'); ?>"><?= $this->translate('Feedback'); ?></a></li>
+                          <li class="muted">&middot;</li>
+                          <li><a href="<?= $this->url('help'); ?>"><?= $this->translate('Help'); ?></a></li>
+                        </ul>
+                        <ul class="footer-links">
+                          <li><a href="https://github.com/Netsensia/netsensia-zf2-skeleton"><?= $this->translate('Source code (GitHub)'); ?></a></li>
+                          <li class="muted">&middot;</li>
+                          <li><a href="https://travis-ci.org/Netsensia/netsensia-zf2-skeleton"><?= $this->translate('Travis CI'); ?></a></li>
+                          <li class="muted">&middot;</li>
+                          <li><a href="http://ci.netsensia.com/job/NETSENSIA-ZF2-SKELETON/"><?= $this->translate('Jenkins'); ?></a></li>
+                        </ul>
+                        <ul class="footer-links">
+                            <li><a href="<?php echo $this->url('locale', ["locale"=>"en_GB"]); ?>"><?php echo $this->translate('English'); ?></a>
+                            <li class="muted">&middot;</li>
+                            <li><a href="<?php echo $this->url('locale', array("locale"=>"fr_FR")); ?>"><?php echo $this->translate('French'); ?></a>
+
+                        </ul>
+                      </div>            
+               
+            </footer>
+       
+
+        <?php echo $this->inlineScript() ?>
+    </body>
+    
+</html>

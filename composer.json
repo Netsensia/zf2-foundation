@@ -1,0 +1,24 @@
+{
+    "name": "netsensia/zf2-foundation",
+    "type": "library",
+    "description": "Foundation classes for ZF2 applications",
+    "keywords": ["zf2"],
+    "homepage": "http://github.com/netsensia/zf2-foundation",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Moreton",
+            "email": "chris@netsensia.com",
+            "homepage": "http://www.netsensia.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Netsensia": "src"
+        }
+    }
+}

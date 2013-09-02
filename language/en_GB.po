@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-09 13:02-0000\n"
+"PO-Revision-Date: 2013-08-09 13:02-0000\n"
+"Last-Translator: Chris Moreton <chris@netsensia.com>\n"
+"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: C:\\Program Files (x86)\\Zend\\Apache2\\htdocs\\netsensia-"
+"zf2-skeleton\\module\\Netsensia\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/Netsensia/Adaptor/Auth/AuthAdaptorMySQL.php:73
+msgid "Login failed.  Please try again."
+msgstr ""
+
+#: src/Netsensia/Controller/AuthController.php:46
+msgid "You are now logged in"
+msgstr ""
+
+#: src/Netsensia/Controller/AuthController.php:70
+msgid "You have been logged out"
+msgstr ""
+
+#: src/Netsensia/Controller/HelpController.php:66
+msgid "Thanks for your feedback"
+msgstr ""
+
+#: src/Netsensia/Controller/HelpController.php:73
+msgid "Your message was sent successfully and will reach us shortly"
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:93
+msgid "The email address is already registered"
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:97
+msgid "The username is already registered"
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:108
+msgid "Please activate your account"
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:144
+msgid "Your password reset request has expired.  Please try again</a>."
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:175
+msgid "Your password was successfully updated."
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:222
+msgid "Password reset request"
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:230
+msgid ""
+"Please check your email.  If you have an account with us, we have sent you "
+"instructions on how to reset your password."
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:291
+msgid "Please choose a password"
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:312
+msgid "Please confirm your password"
+msgstr ""
+
+#: src/Netsensia/Controller/RegisterController.php:322
+msgid "Passwords don't match"
+msgstr ""
+
+#: src/Netsensia/Form/View/Helper/BootstrapForm.php:130
+msgid ""
+"There were some errors on the form.  Please review your entries and try "
+"again."
+msgstr ""
+
+#: view/netsensia/locale/set.phtml:1
+msgid "Your locale has now been changed."
+msgstr ""

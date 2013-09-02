@@ -1,0 +1,7 @@
+<h1>Welcome!</h1>  
+
+Please click the link below to activate your new account.
+
+<br><br>
+
+<a href="<?php echo $this->url('validate-email', ["code"=>$this->activation_code], ['force_canonical' => true]); ?>">Activate your account now</a>

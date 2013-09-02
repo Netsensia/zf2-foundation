@@ -1,0 +1,82 @@
+<div style="padding:15px;">
+    <div class="row">
+        <img style="float:left; width: 400px; padding-right:15px; margin-left:25px" src="img/brand/netsensia.fw.png">
+    </div>
+    <div class="row" style="margin-left:0px;margin-top:5px">
+    <?= $this->translate('Source code for this website is available on <a href="https://github.com/Netsensia/netsensia-zf2-skeleton">GitHub</a>, continuous integration build on <a href="https://travis-ci.org/Netsensia/netsensia-zf2-skeleton">Travis CI</a> and <a href="http://ci.netsensia.com/job/NETSENSIA-ZF2-SKELETON/">Jenkins</a>.'); ?>
+    <?= $this->translate('Code coverage and test metrics <a href="http://ci.netsensia.com/job/NETSENSIA-ZF2-SKELETON/cloverphp/index.dashboard.html">dashboard</a>. '); ?>
+    <div style="margin-top:3px">
+    <?= $this->translate('Recent blog post: <a href="http://www.afewmorelines.com/what-is-behaviour-driven-development/">What is behaviour-driven development?</a>'); ?>
+    </div>
+    </div>
+</div>
+
+<div class="row-fluid">
+            <ul class="thumbnails">
+              <li class="span4">
+                <div class="thumbnail">
+                  <div class="caption">
+                    <strong style="font-size:1.2em"><?php echo $this->translate('Expand your mind') ?></strong>
+                    <p><?php echo $this->translate('We love "word of the day" sites, so we\'ve taken it to the next level.  Each day we\'ll give you a new number drawn from our extensive library of numbers ranging from the lowly zero up to, and including, the big daddy of all numbers: one million.'); ?></p>
+                    <a href="/register" class="btn btn-large"><?php echo $this->translate('Get started'); ?></a> 
+                  </div>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="thumbnail">
+                  <div class="caption">
+                    <strong style="font-size:1.2em"><?php echo $this->translate('Maths made easy') ?></strong>
+                    <p><?php echo $this->translate('Calculate sums up to five times faster with our patent-pending number-adding algorithm, just enter two numbers (lower than 10) and watch as our website adds them for you in a matter of seconds.  99% guaranteed accuracy rate.');?></p>
+                    <a href="/register" class="btn btn-large"><?php echo $this->translate('Get started'); ?></a> 
+                  </div>
+                </div>
+              </li>
+              <li class="span4">
+                <div class="thumbnail">
+                  <div class="caption">
+                    <strong style="font-size:1.2em"><?php echo $this->translate('Amaze your friends') ?></strong>
+                    <p><?php echo $this->translate('Never forget your birthday again.  Enter your date of birth in our notepad and simply visit every day, take a look at your notepad, copy the number into a form along with today\'s date, and we\'ll let you know if today is your big day.  Don\'t forget the cake!'); ?></p>
+                    <a href="/register" class="btn btn-success btn-large"><?php echo $this->translate('Get started'); ?></a> 
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+<div class="row-fluid">
+
+    <div class="span4 featurelist">
+        <strong style="font-size:1.2em;"><?php echo $this->translate('A system for the future'); ?></strong>
+    <ul>        
+    <li><?php echo $this->translate('Works in all known web browsers.<sup>1</sup>'); ?></li> 
+    <li><?php echo $this->translate('Coming soon as a Windows desktop app (versions 3.1 and below).<sup>2</sup>'); ?></li> 
+    <li><?php echo $this->translate('Award winning speed and responsiveness.<sup>3</sup>'); ?></li>
+    <li><?php echo $this->translate('Award winning customer support.<sup>4</sup>'); ?></li>
+    <li><?php echo $this->translate('5 star-rated user-friendliness.  <sup>5</sup>'); ?></li>
+    </ul>
+    </div>
+    
+    <div class="span8">
+    <strong style="font-size:1.2em;"><?php echo $this->translate('What our users say'); ?></strong>
+    
+    <div style="width:100%;font-family:georgia;font-size:11px;margin-top:10px">
+        <?php echo $this->translate('"If there\'s one thing I\'m sure of, it\'s that this is the finest website I\'ve ever used.  I sometimes log on just to look at it in order to relax, as does my wife."'); ?>
+        <br><br>
+        <?php echo $this->translate('"I\'ve used lots of websites in the past, and now I use this one.  I\'ll telling all my friends about it.  Some of them aren\'t as receptive as I had hoped, but I\'m working on it."'); ?>
+        <br><br>
+        <?php echo $this->translate('"Does anyone there speak French?  I doubt it, but I just wanted to say that this is the worst site I have ever used in all my life.  Put that on your customer feedback page."'); ?>
+    </div>    
+
+    </div>
+    
+</div>
+<div class="row-fluid footnotes">
+<ol>
+<li><?= $this->translate("Chrome/Firefox support coming soon.  If you experience problems with IE versions 7 and up, please downgrade your browser to version 6.  Some users have reported also needing to downgrade to Windows XP."); ?>
+<li><?= $this->translate("Doesn't include version 2.03 thru 2.11 or versions 1.01 thru 1.04.  Version 3.0 support planned for phase two."); ?>
+<li><?= $this->translate("Slowest website 2012 (Websites Review Magazine)"); ?>
+<li><?= $this->translate("Worst customer support 2012 (Websites Review Magazine)"); ?>
+<li><?= $this->translate("'Barely usable' - 5/100 stars (Websites Review Magazine)"); ?>
+</ol>
+</div>
+

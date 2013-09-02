@@ -1,0 +1,69 @@
+<?php
+/**
+ * Local Configuration Override
+ *
+ * This configuration override file is for overriding environment-specific and
+ * security-sensitive configuration information. Copy this file without the
+ * .dist extension at the end and populate values as needed.
+ *
+ * @NOTE: This file is ignored from Git by default with the .gitignore included
+ * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
+ * credentials from accidentally being committed into version control.
+ */
+
+return array(
+    'zend-sentry' => array(
+        'sentry-api-key' => 'SENTRY_URI',
+    ),
+    'captcha' => [
+    	'private-key' => 'CAPTCHA_PRIVATE_KEY',
+    	'public-key' => 'CAPTCHA_PUBLIC_KEY',
+    ],
+    'di' => array(
+        'instance' => array(
+        	'alias' => array(
+                'LocationService' => 'Netsensia\Service\MaxmindLocationService',
+            ),
+            'Netsensia\Service\MaxmindLocationService' => array(
+                'parameters' => array(
+                    'userId' => 'MAXMIND_USERID',
+                    'licenseKey' => 'MAXMIND_LICENSEKEY',
+                ),
+            ),    
+            'Netsensia\Service\PdoConnectionService' => array(
+                'parameters' => array(
+                    'dataSourceName'     => 'DB_SOURCE',
+                    'dataSourceUsername' => 'DB_USERNAME',
+                    'dataSourcePassword' => 'DB_PASSWORD',
+                ),
+            ),
+            'Netsensia\Service\EmailService' => array(
+                'parameters' => array(
+                    'smtpHostName'     => 'SMTP_HOSTNAME',
+                    'smtpHost'     => 'SMTP_HOST',
+                    'smtpPort'     => 'SMTP_PORT',
+                    'smtpUsername' => 'SMTP_USERNAME',
+                    'smtpPassword' => 'SMTP_PASSWORD',
+                    'senderName' => 'EMAIL_SENDER_NAME',
+                    'senderAddress' => 'EMAIL_SENDER_ADDRESS'
+                ),
+            ),
+            'Netsensia\Service\UserService' => [
+                'parameters' => [
+                    'defaultColumnValues' => [ 'examplecolumn' => 'Example Value' ],
+                 ],
+            ],            
+        ),
+    ),
+    'registration' => [
+        'requireEmailVerification' => false,                
+    ],
+    'netsensia' => [
+        'debugMode' => true,
+        'enable-users' => true,
+        'captchaForms' => [
+        	'contact' => false,
+        	'register' => false,
+        ]
+    ],    
+);

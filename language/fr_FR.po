@@ -1,0 +1,95 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-09 13:02-0000\n"
+"PO-Revision-Date: 2013-08-09 17:30-0000\n"
+"Last-Translator: Chris Moreton <chris@netsensia.com>\n"
+"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: C:\\Program Files (x86)\\Zend\\Apache2\\htdocs\\netsensia-"
+"zf2-skeleton\\module\\Netsensia\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: src/Netsensia/Adaptor/Auth/AuthAdaptorMySQL.php:73
+msgid "Login failed.  Please try again."
+msgstr "Échec de la connexion. Veuillez essayer à nouveau."
+
+#: src/Netsensia/Controller/AuthController.php:46
+msgid "You are now logged in"
+msgstr "Vous êtes maintenant connecté(e)"
+
+#: src/Netsensia/Controller/AuthController.php:70
+msgid "You have been logged out"
+msgstr "Vous avez été déconnecté(e)"
+
+#: src/Netsensia/Controller/HelpController.php:66
+msgid "Thanks for your feedback"
+msgstr "Merci pour vos commentaires"
+
+#: src/Netsensia/Controller/HelpController.php:73
+msgid "Your message was sent successfully and will reach us shortly"
+msgstr "Votre message a été correctement envoyé et nous parviendra sous peu"
+
+#: src/Netsensia/Controller/RegisterController.php:93
+msgid "The email address is already registered"
+msgstr "L'adresse email est déjà enregistrée"
+
+#: src/Netsensia/Controller/RegisterController.php:97
+msgid "The username is already registered"
+msgstr "Le nom d'utilisateur est déjà enregistré"
+
+#: src/Netsensia/Controller/RegisterController.php:108
+msgid "Please activate your account"
+msgstr "Veuillez activer votre compte"
+
+#: src/Netsensia/Controller/RegisterController.php:144
+msgid "Your password reset request has expired.  Please try again</a>."
+msgstr ""
+"Votre demande de réinitialisation du mot de passe a expiré. Veuillez essayer "
+"à nouveau</a>."
+
+#: src/Netsensia/Controller/RegisterController.php:175
+msgid "Your password was successfully updated."
+msgstr "Votre mot de passe a été correctement mis à jour."
+
+#: src/Netsensia/Controller/RegisterController.php:222
+msgid "Password reset request"
+msgstr "Demande de réinitialisation du mot de passe"
+
+#: src/Netsensia/Controller/RegisterController.php:230
+msgid ""
+"Please check your email.  If you have an account with us, we have sent you "
+"instructions on how to reset your password."
+msgstr ""
+"Veuillez vérifier votre email. Si vous avez un compte avec nous, nous vous "
+"avons envoyé des instructions sur la réinitialisation de votre mot de passe."
+
+#: src/Netsensia/Controller/RegisterController.php:291
+msgid "Please choose a password"
+msgstr "Veuillez choisir un mot de passe"
+
+#: src/Netsensia/Controller/RegisterController.php:312
+msgid "Please confirm your password"
+msgstr "Veuillez confirmer votre mot de passe"
+
+#: src/Netsensia/Controller/RegisterController.php:322
+msgid "Passwords don't match"
+msgstr "Les mots de passe ne correspondent pas"
+
+#: src/Netsensia/Form/View/Helper/BootstrapForm.php:130
+msgid ""
+"There were some errors on the form.  Please review your entries and try "
+"again."
+msgstr ""
+"Il y avait quelques erreurs sur le formulaire. Veuillez examiner vos entrées "
+"et réessayez."
+
+#: view/netsensia/locale/set.phtml:1
+msgid "Your locale has now been changed."
+msgstr "Vos paramètres régionaux ont maintenant été modifiés."
