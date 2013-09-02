@@ -8,23 +8,23 @@ Alternatively, you may want to install from scratch in your own skeleton applica
 
 ### Add to composer.json
 
-    "require" : {
-	"netsensia/zf2-foundation" : "dev-master"
-    }
+	"require" : {
+		"netsensia/zf2-foundation" : "dev-master"
+	}
 
 ### Run Composer
 
-  php composer.phar install --dev
+  	php composer.phar install --dev
 
 ### Copy config files
 
-  cp vendor/netsensia/zf2-foundation/config/netsensia.local.php.dist config/autoload/netsensia.local.php
-  cp vendor/cloud-solutions/zend-sentry.global.php.dist config/autoload/zend-sentry.global.php
+  	cp vendor/netsensia/zf2-foundation/config/netsensia.local.php.dist config/autoload/netsensia.local.php
+  	cp vendor/cloud-solutions/zend-sentry.global.php.dist config/autoload/zend-sentry.global.php
 
 ### Prepare example view scripts
 
-  cp vendor/netsensia/zf2-foundation/config/index.phtml.dist module/Application/view/application/index/index.phtml
-  cp vendor/netsensia/zf2-foundation/config/layout.phtml.dist module/Application/view/application/layout/layout.phtml
+  	cp vendor/netsensia/zf2-foundation/config/index.phtml.dist module/Application/view/application/index/index.phtml
+  	cp vendor/netsensia/zf2-foundation/config/layout.phtml.dist module/Application/view/application/layout/layout.phtml
   
   
   
