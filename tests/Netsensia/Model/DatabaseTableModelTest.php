@@ -37,17 +37,9 @@ class DatabaseTableModelTest extends PHPUnit_Framework_TestCase
     
     public function testCanSetAvailableKey()
     {
-        $exceptionCaught = false;
-    
-        try {
-            $this->model->set('key2', 'newvalue2');
-        } catch (Exception $e) {
-            $exceptionCaught = true;
-        }
-    
-        $this->assertFalse($exceptionCaught);
-        
-        $this->assertEquals('newvalue2', $this->model->get('key2'));
+        $newValue = 'newvalue2';
+        $this->model->set('key2', $newValue);
+        $this->assertEquals($newValue, $this->model->get('key2'));
     }
     
     public function testCanSetAndGetInputFilter()
@@ -100,12 +92,6 @@ class DatabaseTableModelTest extends PHPUnit_Framework_TestCase
         }
         
         $this->assertTrue($exceptionCaught);
-    }
-    
-    public function getIdOnSingleColumnPrimaryKey()
-    {
-        $this->model->setPrimaryKey(['key1'=>1]);
-        $this->assertEquals(1, $this->model->getId());
     }
     
     public function testThrowsExceptionOnGetIdIfNotSingleColumnKey()

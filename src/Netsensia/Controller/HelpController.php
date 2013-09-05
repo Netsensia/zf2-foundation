@@ -58,10 +58,10 @@ class HelpController extends NetsensiaActionController
                 
                 $feedback->setData(
                     array(
-                        'email' => array('value'=>$data['email'], 'type'=>'string'),
-                        'message' => array('value'=>$data['message'], 'type'=>'string'),
-                        'created' => array('value'=>$date, 'type'=>'string'),
-                        'status' => array('value'=>'N', 'type'=>'string'),
+                        'email' => $data['email'],
+                        'message' => $data['message'],
+                        'created' => $date,
+                        'status' => 'N',
                     )
                 );
                 
@@ -76,7 +76,7 @@ class HelpController extends NetsensiaActionController
                 );
                 
                 $this->flashMessenger()->addSuccessMessage(
-                    $this->translate('Your message was sent successfully and will reach us shortly')
+                    $this->translate('Your message was sent successfully and should reach us shortly')
                 );
                 
                 $this->redirect()->toRoute('home');
