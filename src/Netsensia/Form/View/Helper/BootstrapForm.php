@@ -48,8 +48,8 @@ class BootstrapForm extends AbstractHelper
             echo('<div class="controls">');
         
             if ($element->getAttribute('icon')) {
-                echo('<div class="input-prepend">');
-                echo('<span class="add-on"><i class="icon-' . $element->getAttribute('icon') . '"></i></span>');
+                echo('<div class="input-group">');
+                echo('<span class="input-group-addon"><i class="glyphicon glyphicon-' . $element->getAttribute('icon') . '"></i></span>');
                 echo $this->view->formElement($element);
                 echo('</div>');
             } else {

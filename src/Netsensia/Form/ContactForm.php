@@ -25,7 +25,8 @@ class ContactForm extends CaptchaForm
         $name->setAttributes(
             [
             'type'  => 'text',
-            'icon' => 'envelope'
+            'icon' => 'envelope',
+            'class' => 'form-control',
             ]
         );
         
@@ -33,7 +34,8 @@ class ContactForm extends CaptchaForm
         $message->setLabel($this->translate('Your question or feedback'));
         $message->setAttributes(
             [
-            'type'  => 'textarea'
+            'type'  => 'textarea',
+            'class' => 'form-control',
             ]
         );
         

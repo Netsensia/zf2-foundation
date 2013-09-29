@@ -18,7 +18,8 @@ class RegisterForm extends CaptchaForm
         $username->setAttributes(
             [
             'type'  => 'text',
-            'icon'  => 'user'
+            'icon'  => 'user',
+            'class' => 'form-control',
             ]
         );
         
@@ -27,7 +28,8 @@ class RegisterForm extends CaptchaForm
         $email->setAttributes(
             [
             'type'  => 'text',
-            'icon'  => 'envelope'
+            'icon'  => 'envelope',
+            'class' => 'form-control',
             ]
         );
         
@@ -37,7 +39,8 @@ class RegisterForm extends CaptchaForm
             [
             'type'  => 'password',
             'id'    => 'password',
-            'icon'  => 'lock'
+            'icon'  => 'lock',
+            'class' => 'form-control',
             ]
         );
         
@@ -46,7 +49,8 @@ class RegisterForm extends CaptchaForm
         $confirmPassword->setAttributes(
             [
             'type'  => 'password',
-            'icon'  => 'lock'
+            'icon'  => 'lock',
+            'class' => 'form-control',
             ]
         );
         
@@ -55,7 +59,7 @@ class RegisterForm extends CaptchaForm
         $send->setAttributes(
             [
             'type'  => 'submit',
-            'class' => 'btn btn-success'
+            'class' => 'btn btn-success',
             ]
         );
         

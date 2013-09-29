@@ -23,7 +23,8 @@ class LoginForm extends NetsensiaForm
             [
             'id' => 'login-email-standard',
             'type'  => 'text',
-            'icon' => 'envelope'
+            'icon' => 'envelope',
+            'class' => 'form-control',
             ]
         );
         
@@ -33,7 +34,8 @@ class LoginForm extends NetsensiaForm
             [
             'type'  => 'password',
             'id' => 'login-password-standard',
-            'icon' => 'lock'
+            'icon' => 'lock',
+            'class' => 'form-control',
             ]
         );
         

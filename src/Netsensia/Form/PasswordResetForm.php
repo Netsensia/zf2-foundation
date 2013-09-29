@@ -24,7 +24,8 @@ class PasswordResetForm extends NetsensiaForm
             [
             'id' => 'passwordreset-email',
             'type'  => 'text',
-            'icon' => 'envelope'
+            'icon' => 'envelope',
+            'class' => 'form-control',
             ]
         );
         

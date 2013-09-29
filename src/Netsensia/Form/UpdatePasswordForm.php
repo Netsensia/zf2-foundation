@@ -22,7 +22,8 @@ class UpdatePasswordForm extends NetsensiaForm
             [
             'type'  => 'password',
             'id'    => 'password',
-            'icon'  => 'lock'
+            'icon'  => 'lock',
+            'class' => 'form-control',
             ]
         );
         
@@ -31,7 +32,8 @@ class UpdatePasswordForm extends NetsensiaForm
         $confirmPassword->setAttributes(
             [
             'type'  => 'password',
-            'icon'  => 'lock'
+            'icon'  => 'lock',
+            'class' => 'form-control',
             ]
         );
         
