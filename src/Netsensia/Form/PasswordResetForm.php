@@ -30,7 +30,17 @@ class PasswordResetForm extends NetsensiaForm
         );
         
         $this->add($email);
-        $this->addSubmit('Request password reset');
+        
+        $send = new Element('send');
+        $send->setValue('Request password reset');
+        $send->setAttributes(
+            [
+            'type'  => 'submit',
+            'class' => 'btn btn-default'
+            ]
+        );
+                
+        $this->add($send);
 
         parent::prepare();
     }

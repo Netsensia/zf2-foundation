@@ -59,7 +59,7 @@ class RegisterForm extends CaptchaForm
         $send->setAttributes(
             [
             'type'  => 'submit',
-            'class' => 'btn btn-success',
+            'class' => 'btn btn-default',
             ]
         );
         

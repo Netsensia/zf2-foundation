@@ -47,7 +47,7 @@ class LoginForm extends NetsensiaForm
         $send->setAttributes(
             [
             'type'  => 'submit',
-            'class' => 'btn btn-success'
+            'class' => 'btn btn-default'
             ]
         );
         
