@@ -98,6 +98,11 @@ class DatabaseTableModel
     {
         $this->data = $data;        
     }
+    
+    public function getData()
+    {
+        return $this->data;
+    }
 
     /**
      * @param array $data
@@ -115,7 +120,6 @@ class DatabaseTableModel
         $this->data[$key] = $value;
     }
     
-    // Add content to this method:
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         $this->inputFilter = $inputFilter;
