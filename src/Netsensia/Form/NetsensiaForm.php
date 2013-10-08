@@ -9,6 +9,7 @@ use Zend\Form\Element;
 use Netsensia\Provider\ProvidesServiceLocator;
 use Netsensia\Provider\ProvidesTranslator;
 use Zend\Db\TableGateway\TableGateway;
+use Netsensia\Model\DatabaseTableModel;
 
 class NetsensiaForm extends Form
 {
@@ -66,7 +67,6 @@ class NetsensiaForm extends Form
         
         $rowset = $table->select();
         
-        $optionsArray = [];
         foreach ($rowset as $row) {
             $optionsArray[$row[$tableKey]] = $row[$tableValue];
         }
@@ -139,6 +139,20 @@ class NetsensiaForm extends Form
     public function setDefaultClass($class)
     {
         $this->defaultClass = $class;
+    }
+    
+    public function setDataFromModel(DatabaseTableModel $model)
+    {
+        $modelData = $model->getData();
+        $formData = [];
+        
+        $prefix = $this->getFieldPrefix();
+        
+        foreach ($modelData as $key => $value) {
+            $formData[$prefix . $key] = $value;           
+        }
+        
+        $this->setData($formData);
     }
     
     public function setTranslator($translator)
