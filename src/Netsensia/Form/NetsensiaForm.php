@@ -95,6 +95,8 @@ class NetsensiaForm extends Form
         
         $rowset = $table->select();
         
+        $optionsArray = [];
+
         foreach ($rowset as $row) {
             $optionsArray[$row[$tableKey]] = $row[$tableValue];
         }
