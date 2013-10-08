@@ -9,6 +9,11 @@ return array(
             'Netsensia\Controller\Help' => 'Netsensia\Controller\HelpController',
         ),
     ),
+    'controller_plugins' => array(
+        'invokables' => array(
+            'processForm' => 'Netsensia\Controller\Plugin\ProcessForm',
+        )
+    ),    
     'service_manager' => array(
         'invokables' => array(
             'AuthAdaptorMySQL' => 'Netsensia\Adaptor\Auth\AuthAdaptorMySQL',
