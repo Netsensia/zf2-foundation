@@ -41,17 +41,19 @@ class NetsensiaForm extends Form
     
     public function addSelect($options)
     {
+
         if (!is_array($options)) {
             $options = [ 'name' => $options ];
         }
         
-        $name       = $this->fieldPrefix . $options['name'];
-        $label      = $options['label']      ?: ucfirst($options['name']);
-        $icon       = $options['icon']       ?: $this->defaultIcon;
-        $class      = $options['class']      ?: $this->defaultClass;
-        $table      = $options['table']      ?: $options['name'];
-        $tableKey   = $options['tableKey']   ?: $options['name'] . 'id'; 
-        $tableValue = $options['tableValue'] ?: $options['name'];
+        $name       = $this->fieldPrefix . $options['name'] . 'id';
+        
+        $label      = isset($options['label']) ? $options['label'] : ucfirst($options['name']);
+        $icon       = isset($options['icon']) ? $options['icon'] : $this->defaultIcon;
+        $class      = isset($options['class']) ? $options['class'] : $this->defaultClass;
+        $table      = isset($options['table']) ? $options['table'] : $options['name'];
+        $tableKey   = isset($options['tableKey']) ? $options['tableKey'] : $options['name'] . 'id'; 
+        $tableValue = isset($options['tableValue']) ? $options['tableValue'] : $options['name'];
         
         $select = new Select($name);
         $select->setLabel($label);
@@ -59,6 +61,7 @@ class NetsensiaForm extends Form
         if (!$this->dbAdapter) {
             throw new \Exception('DB Adapter is not set');
         }
+        
         $table = new TableGateway($table, $this->dbAdapter);
         
         $rowset = $table->select();
@@ -88,9 +91,9 @@ class NetsensiaForm extends Form
         }
         
         $name       = $this->fieldPrefix . $options['name'];
-        $label      = $options['label']      ?: ucfirst($options['name']);
-        $icon       = $options['icon']       ?: $this->defaultIcon;
-        $class      = $options['class']      ?: $this->defaultClass;
+        $label      = isset($options['label']) ? $options['label'] : ucfirst($options['name']);
+        $icon       = isset($options['icon']) ? $options['icon'] : $this->defaultIcon;
+        $class      = isset($options['class']) ? $options['class'] : $this->defaultClass;
     
         $select = new Element($name);
         $select->setLabel($label);
