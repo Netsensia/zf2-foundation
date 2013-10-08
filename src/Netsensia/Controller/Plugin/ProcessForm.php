@@ -8,7 +8,8 @@ class ProcessForm extends AbstractPlugin
 {
     public function __invoke(
         $formName,
-        $modelName
+        $modelName,
+        $modelId
     ) 
     {
 
@@ -23,7 +24,7 @@ class ProcessForm extends AbstractPlugin
         $sl = $this->controller->getServiceLocator();
         $tableModel = $sl->get($modelName . 'Model');
         
-        $tableModel->init($id);
+        $tableModel->init($modelId);
         
         if ($request->isPost()) {
             $formData = $request->getPost()->toArray();

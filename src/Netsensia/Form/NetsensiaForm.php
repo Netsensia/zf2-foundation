@@ -6,8 +6,6 @@ use Zend\Form\Element\Submit;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element;
-use Netsensia\Provider\ProvidesServiceLocator;
-use Netsensia\Provider\ProvidesTranslator;
 use Zend\Db\TableGateway\TableGateway;
 use Netsensia\Model\DatabaseTableModel;
 
@@ -47,14 +45,44 @@ class NetsensiaForm extends Form
             $options = [ 'name' => $options ];
         }
         
-        $name       = $this->fieldPrefix . $options['name'] . 'id';
+        $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
         
-        $label      = isset($options['label']) ? $options['label'] : ucfirst($options['name']);
-        $icon       = isset($options['icon']) ? $options['icon'] : $this->defaultIcon;
-        $class      = isset($options['class']) ? $options['class'] : $this->defaultClass;
-        $table      = isset($options['table']) ? $options['table'] : $options['name'];
-        $tableKey   = isset($options['tableKey']) ? $options['tableKey'] : $options['name'] . 'id'; 
-        $tableValue = isset($options['tableValue']) ? $options['tableValue'] : $options['name'];
+
+        if (isset($options['label'])) {
+            $label = $options['label'];
+        } else {
+            $label = ucwords(str_replace('-', ' ', $options['name']));
+        }
+        
+        if (isset($options['icon'])) {
+            $icon = $options['icon'];
+        } else {
+            $icon = $this->defaultIcon;
+        }
+        
+        if (isset($options['class'])) {
+            $class = $options['class'];
+        } else {
+            $class = $this->defaultClass;
+        }
+        
+        if (isset($options['table'])) {
+            $table = $options['table'];
+        } else {
+            $table = $options['name'];
+        }
+        
+        if (isset($options['tableKey'])) {
+            $tableKey = $options['tableKey'];
+        } else {
+            $tableKey = $options['name'] . 'id';
+        }
+        
+        if (isset($options['tableValue'])) {
+            $tableValue = $options['tableValue'];
+        } else {
+            $tableValue = $options['name'];
+        }
         
         $select = new Select($name);
         $select->setLabel($label);
@@ -90,10 +118,25 @@ class NetsensiaForm extends Form
             $options = [ 'name' => $options ];
         }
         
-        $name       = $this->fieldPrefix . $options['name'];
-        $label      = isset($options['label']) ? $options['label'] : ucfirst($options['name']);
-        $icon       = isset($options['icon']) ? $options['icon'] : $this->defaultIcon;
-        $class      = isset($options['class']) ? $options['class'] : $this->defaultClass;
+        $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
+        
+        if (isset($options['label'])) {
+            $label = $options['label'];
+        } else {
+            $label = ucwords(str_replace('-', ' ', $options['name']));
+        }
+        
+        if (isset($options['icon'])) {
+            $icon = $options['icon'];
+        } else {
+            $icon = $this->defaultIcon;
+        }
+        
+        if (isset($options['class'])) {
+            $class = $options['class'];
+        } else {
+            $class = $this->defaultClass;
+        }
     
         $select = new Element($name);
         $select->setLabel($label);
