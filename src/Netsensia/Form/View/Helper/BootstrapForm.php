@@ -43,10 +43,20 @@ class BootstrapForm extends AbstractHelper
             if ($element instanceof Submit) {
                 continue;
             }
-            echo('<div class="control-group">');
+            
+            $isInvisibleOther = (strpos($element->getAttribute('class'), 'invisible-other') !== false);
+            
+            if ($isInvisibleOther) {
+                $id = $element->getAttribute('id');
+                echo('<div id="' . $id . '" class="control-group invisible-other">');
+            } else {
+                echo('<div class="control-group">');
+            }
+            
             echo('<label class="control-label">' . $element->getLabel() . '</label>');
+
             echo('<div class="controls">');
-        
+            
             if ($element->getAttribute('icon')) {
                 echo('<div class="input-group">');
                 echo('<span class="input-group-addon"><i class="glyphicon glyphicon-' . $element->getAttribute('icon') . '"></i></span>');
@@ -55,6 +65,7 @@ class BootstrapForm extends AbstractHelper
             } else {
                 echo $this->view->formElement($element);
             }
+            
             if ($element->getMessages()) {
                 foreach ($element->getMessages() as $message) {
                     echo('<div class="form-field-error">');

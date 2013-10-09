@@ -105,6 +105,7 @@ class NetsensiaForm extends Form
         
         $select->setAttributes(
             [
+                'id'    => $name,
                 'type'  => 'select',
                 'icon'  => $icon,
                 'class' => $class,
@@ -112,6 +113,46 @@ class NetsensiaForm extends Form
         );
         
         $this->add($select);
+    }
+    
+    public function addSelectWithInvisibleOther($options)
+    {
+        if (!is_array($options)) {
+            $options = [ 'name' => $options ];
+        }
+        
+        $this->addSelect($options);
+        
+        $name = $options['name'] . '_other';
+        
+        if (isset($options['label'])) {
+            $label = $options['label'];
+        } else {
+            $label = ucwords(str_replace('-', ' ', $options['name']));
+        }
+        
+        $label = 'Other ' . $label;
+
+        if (isset($options['icon'])) {
+            $icon = $options['icon'];
+        } else {
+            $icon = $this->defaultIcon;
+        }
+        
+        if (isset($options['class'])) {
+            $class = $options['class'];
+        } else {
+            $class = $this->defaultClass;
+        }
+
+        $options = [
+            'name'  => $name,
+            'label' => $label,
+            'icon'  => $icon,
+            'class' => $class . ' invisible-other'
+        ];
+        
+        $this->addText($options);
     }
     
     public function addText($options)
@@ -140,18 +181,19 @@ class NetsensiaForm extends Form
             $class = $this->defaultClass;
         }
     
-        $select = new Element($name);
-        $select->setLabel($label);
+        $text = new Element($name);
+        $text->setLabel($label);
     
-        $select->setAttributes(
+        $text->setAttributes(
             [
+                'id'    => $name,
                 'type'  => 'text',
                 'icon'  => $icon,
                 'class' => $class,
             ]
         );
     
-        $this->add($select);
+        $this->add($text);
     }
     
     public function addHidden($name, $value)
