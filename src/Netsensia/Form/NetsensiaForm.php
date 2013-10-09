@@ -122,7 +122,7 @@ class NetsensiaForm extends Form
         
         $this->addSelect($options);
         
-        $name = $options['name'] . '_other';
+        $name = $options['name'] . 'other';
         
         if (isset($options['label'])) {
             $label = $options['label'];

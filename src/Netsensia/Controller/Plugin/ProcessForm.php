@@ -38,7 +38,6 @@ class ProcessForm extends AbstractPlugin
                 foreach ($formData as $key => $value) {
                     if ($key != 'form-submit') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
-                        $modelField = str_replace('_', '', $modelField);
                         $modelData[$modelField] = $value;
                     }
                 }
