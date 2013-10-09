@@ -46,7 +46,6 @@ class NetsensiaForm extends Form
         }
         
         $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
-        
 
         if (isset($options['label'])) {
             $label = $options['label'];
@@ -84,7 +83,7 @@ class NetsensiaForm extends Form
             $tableValue = $options['name'];
         }
         
-        $select = new Select($name);
+        $select = new Select($name . 'id');
         $select->setLabel($label);
         
         if (!$this->dbAdapter) {
