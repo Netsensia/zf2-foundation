@@ -44,7 +44,7 @@ class RegisterForm extends CaptchaForm
             ]
         );
         
-        $confirmPassword = new Element('confirmpassword');
+        $confirmPassword = new Element('confirm-password');
         $confirmPassword->setLabel($this->translate('Confirm Password'));
         $confirmPassword->setAttributes(
             [

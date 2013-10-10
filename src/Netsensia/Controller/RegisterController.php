@@ -309,7 +309,7 @@ class RegisterController extends NetsensiaActionController
         
         return $inputFactory->createInput(
             [
-                'name'     => 'confirmpassword',
+                'name'     => 'confirm-password',
                 'required' => true,
                 'validators' => array(
                     [

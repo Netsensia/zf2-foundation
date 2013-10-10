@@ -235,7 +235,9 @@ class NetsensiaForm extends Form
         $prefix = $this->getFieldPrefix();
         
         foreach ($modelData as $key => $value) {
-            $formData[$prefix . $key] = $value;           
+            if ($key != 'password') {
+                $formData[$prefix . $key] = $value;
+            }           
         }
         
         $this->setData($formData);
@@ -254,4 +256,6 @@ class NetsensiaForm extends Form
             return $text;
         }
     }
+    
+    
 }
