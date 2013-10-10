@@ -2,12 +2,15 @@
 namespace Netsensia\Form;
 
 use Zend\Form\Form;
+use Zend\InputFilter\Factory as InputFactory;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element;
 use Zend\Db\TableGateway\TableGateway;
 use Netsensia\Model\DatabaseTableModel;
+use Zend\Validator\NotEmpty;
+use Zend\Validator\Identical;
 
 class NetsensiaForm extends Form
 {
@@ -168,6 +171,12 @@ class NetsensiaForm extends Form
             $label = ucwords(str_replace('-', ' ', $options['name']));
         }
         
+        if (isset($options['type'])) {
+            $type = $options['type'];
+        } else {
+            $type = 'text';
+        }
+        
         if (isset($options['icon'])) {
             $icon = $options['icon'];
         } else {
@@ -186,13 +195,85 @@ class NetsensiaForm extends Form
         $text->setAttributes(
             [
                 'id'    => $name,
-                'type'  => 'text',
+                'type'  => $type,
                 'icon'  => $icon,
                 'class' => $class,
             ]
         );
     
         $this->add($text);
+    }
+    
+    public function addPasswordPair()
+    {
+        $this->addText(
+            [
+                'name'=>'password', 
+                'icon'=>'lock',
+                'type'=>'password',
+            ]
+        );
+        $this->addText(
+            [
+                'name'=>'confirm-password', 
+                'icon'=>'lock',
+                'type'=>'password',
+                'label'=>$this->translate('Confirm Password'),
+            ]
+        );
+
+        $inputFilter = $this->getInputFilter();
+        
+        $inputFactory = new InputFactory();
+        
+        $inputFilter->add($inputFactory->createInput(
+                [
+                'name'     => $this->fieldPrefix . 'password',
+                'required' => true,
+                'validators' => array(
+                    [
+                    'name'    => 'NotEmpty',
+                    'options' => array(
+                        'messages' => array(
+                            NotEmpty::IS_EMPTY => $this->translate('Please choose a password'),
+                        )
+                    ),
+                    'break_chain_on_failure' => true,
+                    ],
+                ),
+                ]
+            )
+        );
+        
+        $inputFilter->add($inputFactory->createInput(
+                [
+                'name'     => $this->fieldPrefix . 'confirmpassword',
+                'required' => true,
+                'validators' => array(
+                    [
+                    'name'    => 'NotEmpty',
+                    'options' => array(
+                        'messages' => array(
+                            NotEmpty::IS_EMPTY => $this->translate('Please confirm your password'),
+                        )
+                    ),
+                    'break_chain_on_failure' => true,
+                    ],
+                    array(
+                        'name'    => 'Identical',
+                        'options' => array(
+                            'token' => $this->fieldPrefix . 'password',
+                            'messages' => array(
+                                Identical::NOT_SAME => $this->translate("Passwords don't match"),
+                            )
+                        ),
+                    ),
+                ),
+                ]
+            )
+        );
+
+        $this->setInputFilter($inputFilter);
     }
     
     public function addHidden($name, $value)

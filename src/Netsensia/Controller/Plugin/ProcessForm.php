@@ -46,6 +46,15 @@ class ProcessForm extends AbstractPlugin
                     $tableModel->getData(),
                     $modelData
                 );
+                
+                if (isset($data['password'])) {
+                    $userService = 
+                        $this->controller->getServiceLocator()->get('Netsensia\Service\UserService');
+                    
+                    $data['password'] = $userService->encryptPassword($data['password']);
+                    unset($data['confirmpassword']);
+                }
+                
                 $tableModel->setData($data);
         
                 $tableModel->save();
