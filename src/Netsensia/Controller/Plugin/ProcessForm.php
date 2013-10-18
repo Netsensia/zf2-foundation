@@ -35,11 +35,22 @@ class ProcessForm extends AbstractPlugin
                 $prefix = $form->getFieldPrefix();
                                 
                 $modelData = [];
+                
+                $isUsingAddress = false;
+                
                 foreach ($formData as $key => $value) {
                     if ($key != 'form-submit') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
                     }
+                    
+                    if ($modelField == 'addresslineone') {
+                    	$isUsingAddress = true;
+                    }
+                }
+                
+                if ($isUsingAddress) {
+                	$modelData = $this->saveAddress($modelData);
                 }
                 
                 $data = array_merge(
@@ -54,7 +65,7 @@ class ProcessForm extends AbstractPlugin
                     $data['password'] = $userService->encryptPassword($data['password']);
                     unset($data['confirmpassword']);
                 }
-                
+                                
                 $tableModel->setData($data);
         
                 $tableModel->save();
@@ -66,6 +77,36 @@ class ProcessForm extends AbstractPlugin
         
         return $form;
         
+    }
+    
+    private function saveAddress($data)
+    {
+    	$sl = $this->controller->getServiceLocator();
+    	
+    	$tableModel = $sl->get('AddressModel');
+    	$tableModel->init();
+    	
+    	$data['address1'] 	= $data['addresslineone'];
+    	$data['address2'] 	= $data['addresslinetwo'];
+    	$data['town'] 		= $data['addresscity'];
+    	$data['county'] 	= $data['addresscounty'];
+    	$data['country'] 	= $data['addresscountry'];
+    	$data['postcode']   = $data['addresspostcode'];
+    	
+    	$tableModel->setData($data);
+    	$tableModel->save();
+    	
+    	$data['addressid'] = $tableModel->getLastInsertedId();
+    	
+    	unset($data['addresslineone']);
+    	unset($data['addresslinetwo']);
+    	unset($data['addresslinethree']);
+    	unset($data['addresstown']);
+    	unset($data['addresscounty']);
+    	unset($data['addresscountry']);
+    	unset($data['addresspostcode']);
+    	    	
+    	return $data;
     }
 }
 

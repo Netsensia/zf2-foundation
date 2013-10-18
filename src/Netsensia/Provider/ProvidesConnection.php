@@ -18,6 +18,11 @@ trait ProvidesConnection
 
         return $query;
     }
+    
+    protected function getLastInsertedId()
+    {
+    	return $this->getConnection()->getLastInsertedId();
+    }
 }
 
 ?>

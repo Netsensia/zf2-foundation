@@ -62,6 +62,11 @@ class Module implements AutoloaderProviderInterface
                     $instance->setServiceLocator($sl);
                     return $instance;
                 },
+                'AddressModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                	$instance = new \Netsensia\Model\Address();
+                	$instance->setServiceLocator($sl);
+                	return $instance;
+                },
             ),
         ];        
     }

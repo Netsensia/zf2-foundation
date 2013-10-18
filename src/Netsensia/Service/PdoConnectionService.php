@@ -45,6 +45,11 @@ class PdoConnectionService
         
         return $this->db;
     }
+    
+    public function getLastInsertedId()
+    {
+    	return $this->db->lastInsertId();
+    }
 
     ### PRIVATE MEMBERS
 

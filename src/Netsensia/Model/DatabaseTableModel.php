@@ -184,6 +184,11 @@ class DatabaseTableModel
         return true;
     }
     
+    public function getLastInsertedId()
+    {
+    	return $this->getLastInsertedId();
+    }
+    
     public function isPopulated()
     {
         return $this->getPrimaryKey() != null;

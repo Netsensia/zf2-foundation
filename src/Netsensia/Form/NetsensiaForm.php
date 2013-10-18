@@ -47,9 +47,14 @@ class NetsensiaForm extends Form
     	$this->addText('address-line-two');
     	$this->addText('address-line-three');
     	$this->addText('address-town');
-    	$this->addText('address-city');
+    	$this->addText('address-county');
     	$this->addText('address-postcode');
-    	$this->addSelect('country');
+    	$this->addSelect(
+    		[
+    			'name'=>'address-country',
+    			'table'=>'country',
+    		]
+    	);
     }
     
     public function addSelect($options)
@@ -88,13 +93,13 @@ class NetsensiaForm extends Form
         if (isset($options['tableKey'])) {
             $tableKey = $options['tableKey'];
         } else {
-            $tableKey = $options['name'] . 'id';
+            $tableKey = $options['table'] . 'id';
         }
         
         if (isset($options['tableValue'])) {
             $tableValue = $options['tableValue'];
         } else {
-            $tableValue = $options['name'];
+            $tableValue = $options['table'];
         }
         
         $select = new Select($name . 'id');
