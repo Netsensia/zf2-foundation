@@ -41,6 +41,17 @@ class NetsensiaForm extends Form
         $this->add($submitButton);
     }
     
+    public function addAddress($options)
+    {
+    	$this->addText('address-line-one');
+    	$this->addText('address-line-two');
+    	$this->addText('address-line-three');
+    	$this->addText('address-town');
+    	$this->addText('address-city');
+    	$this->addText('address-postcode');
+    	$this->addSelect('country');
+    }
+    
     public function addSelect($options)
     {
 
