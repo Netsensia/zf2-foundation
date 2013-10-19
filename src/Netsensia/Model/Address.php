@@ -25,6 +25,6 @@ class Address extends DatabaseTableModel
     public function getAddressId()
     {
         $primaryKey = $this->getPrimaryKey();
-        return $primaryKey['userid'];
+        return $primaryKey['addressid'];
     }
 }

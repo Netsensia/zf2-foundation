@@ -36,7 +36,7 @@ class ProcessForm extends AbstractPlugin
                                 
                 $modelData = [];
                 
-                $isUsingAddress = false;
+                $addressColumns = [];
                 
                 foreach ($formData as $key => $value) {
                     if ($key != 'form-submit') {
@@ -44,13 +44,16 @@ class ProcessForm extends AbstractPlugin
                         $modelData[$modelField] = $value;
                     }
                     
-                    if ($modelField == 'addresslineone') {
-                    	$isUsingAddress = true;
+                    if (strpos($modelField, 'addresslineone') !== false) {
+                        $addressColumns[] = str_replace('addresslineone', '', $modelField);
                     }
                 }
                 
-                if ($isUsingAddress) {
-                	$modelData = $this->saveAddress($modelData);
+                foreach ($addressColumns as $addressColumn) {
+                	$modelData = $this->saveAddress(
+                	    $modelData, 
+                	    $addressColumn
+                    );
                 }
                 
                 $data = array_merge(
@@ -79,34 +82,35 @@ class ProcessForm extends AbstractPlugin
         
     }
     
-    private function saveAddress($data)
+    private function saveAddress(
+        $modelData,
+        $addressColumn
+    )
     {
     	$sl = $this->controller->getServiceLocator();
     	
-    	$tableModel = $sl->get('AddressModel');
-    	$tableModel->init();
+    	$addressModel = $sl->get('AddressModel');
+    	$addressModel->init();
     	
-    	$data['address1'] 	= $data['addresslineone'];
-    	$data['address2'] 	= $data['addresslinetwo'];
-    	$data['town'] 		= $data['addresscity'];
-    	$data['county'] 	= $data['addresscounty'];
-    	$data['country'] 	= $data['addresscountry'];
-    	$data['postcode']   = $data['addresspostcode'];
+    	$addressData['address1']   = $modelData[$addressColumn . 'addresslineone'];
+    	$addressData['address2']   = $modelData[$addressColumn . 'addresslinetwo'];
+    	$addressData['town'] 	   = $modelData[$addressColumn . 'addresstown'];
+    	$addressData['county'] 	   = $modelData[$addressColumn . 'addresscounty'];
+    	$addressData['countryid']  = $modelData[$addressColumn . 'addresscountryid'];
+    	$addressData['postcode']   = $modelData[$addressColumn . 'addresspostcode'];
     	
-    	$tableModel->setData($data);
-    	$tableModel->save();
-    	
-    	$data['addressid'] = $tableModel->getLastInsertedId();
-    	
-    	unset($data['addresslineone']);
-    	unset($data['addresslinetwo']);
-    	unset($data['addresslinethree']);
-    	unset($data['addresstown']);
-    	unset($data['addresscounty']);
-    	unset($data['addresscountry']);
-    	unset($data['addresspostcode']);
+    	$addressModel->setData($addressData);
+    	$modelData[$addressColumn] = $addressModel->create();
+
+    	unset($modelData[$addressColumn . 'addresslineone']);
+    	unset($modelData[$addressColumn . 'addresslinetwo']);
+    	unset($modelData[$addressColumn . 'addresslinethree']);
+    	unset($modelData[$addressColumn . 'addresstown']);
+    	unset($modelData[$addressColumn . 'addresscounty']);
+    	unset($modelData[$addressColumn . 'addresscountryid']);
+    	unset($modelData[$addressColumn . 'addresspostcode']);
     	    	
-    	return $data;
+    	return $modelData;
     }
 }
 

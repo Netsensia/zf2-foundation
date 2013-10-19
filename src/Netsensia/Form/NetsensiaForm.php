@@ -41,18 +41,56 @@ class NetsensiaForm extends Form
         $this->add($submitButton);
     }
     
-    public function addAddress($options)
+    public function addAddress($prefix)
     {
-    	$this->addText('address-line-one');
-    	$this->addText('address-line-two');
-    	$this->addText('address-line-three');
-    	$this->addText('address-town');
-    	$this->addText('address-county');
-    	$this->addText('address-postcode');
+    	$this->addText(
+    	    [
+    	    'name'=>$prefix . 'address-line-one', 
+    	    'label' => 'Address 1',
+    	    'icon' => 'home',
+            ]
+        );
+    	$this->addText(
+    	    [
+    	    'name'=>$prefix . 'address-line-two',
+    	    'label' => 'Address 2',
+    	    'icon' => 'home',
+    	    ]
+    	);
+    	$this->addText(
+    	    [
+    	    'name'=>$prefix . 'address-line-three',
+    	    'label' => 'Address 3',
+    	    'icon' => 'home',
+    	    ]
+    	);
+    	$this->addText(
+    	    [
+    	    'name'=>$prefix . 'address-town',
+    	    'label' => 'Town',
+    	    'icon' => 'home',
+    	    ]
+    	);
+    	$this->addText(
+    	    [
+    	    'name'=>$prefix . 'address-county',
+    	    'label' => 'County',
+    	    'icon' => 'home',
+    	    ]
+    	);
+    	$this->addText(
+    	    [
+    	    'name'=>$prefix . 'address-postcode',
+    	    'label' => 'Postcode',
+    	    'icon' => 'home',
+    	    ]
+    	);
     	$this->addSelect(
     		[
-    			'name'=>'address-country',
-    			'table'=>'country',
+    		'name'=>$prefix . 'address-country',
+    	    'label'=>'Country',
+    		'table'=>'country',
+    	    'icon'=>'home',
     		]
     	);
     }
@@ -93,13 +131,13 @@ class NetsensiaForm extends Form
         if (isset($options['tableKey'])) {
             $tableKey = $options['tableKey'];
         } else {
-            $tableKey = $options['table'] . 'id';
+            $tableKey = $table . 'id';
         }
         
         if (isset($options['tableValue'])) {
             $tableValue = $options['tableValue'];
         } else {
-            $tableValue = $options['table'];
+            $tableValue = $table;
         }
         
         $select = new Select($name . 'id');
