@@ -22,7 +22,7 @@ trait ProvidesUserInfo
     
     public function getUserId()
     {
-        return $this->getUserIdentity()->getUserId();
+       	return $this->getUserIdentity()->getUserId();
     }
         
     public function getUserSessionModel()

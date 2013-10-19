@@ -12,7 +12,6 @@ class ProcessForm extends AbstractPlugin
         $modelId
     ) 
     {
-
         $form = $this->controller->getServiceLocator()->get($formName);
         
         $form->prepare();
@@ -72,6 +71,13 @@ class ProcessForm extends AbstractPlugin
                 $tableModel->setData($data);
         
                 $tableModel->save();
+                
+                $this->controller->flashMessenger()->addSuccessMessage('Your details have been saved');
+                $router = $sl->get('router');
+                $request = $sl->get('request');
+                
+                $routeMatch = $router->match($request);
+                $this->controller->redirect()->toRoute($routeMatch->getMatchedRouteName());
             }
         
         } else {

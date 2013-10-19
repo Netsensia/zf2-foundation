@@ -127,9 +127,13 @@ class BootstrapForm extends AbstractHelper
         if ($this->form->getMessages()) {
             echo('<div class="alert alert-danger">');
             echo('<button type="button" class="close" data-dismiss="alert">&times;</button>');
-            echo($this->getView()->translate('There were some errors on the form.  Please review your entries and try again.'));
+            echo($this->getView()->translate(
+            		'There were some errors on the form.  ' .
+            		'Please review your entries and try again.'
+    			)
+    		);
             echo('</div>');
-        }        
+        }       
     }
     
     protected function openForm($title, $action) {
