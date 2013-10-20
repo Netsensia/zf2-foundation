@@ -276,15 +276,17 @@ class DatabaseTableModel
             $this->setData($data);
             
             foreach ($this->relations as $column => $relation) {
-                $model = $this->loadModel(
-                    $relation['model'],
-                    $this->data[$column]
-                );
-            
-                $modelData = $model->getData();
-            
-                foreach ($modelData as $field => $value) {
-                    $this->data[$column . '_' . $relation['model'] . '_' . $field] = $value;
+                if ($this->data[$column] != '') {
+                    $model = $this->loadModel(
+                        $relation['model'],
+                        $this->data[$column]
+                    );
+    
+                    $modelData = $model->getData();
+                    
+                    foreach ($modelData as $field => $value) {
+                        $this->data[$column . '_' . $relation['model'] . '_' . $field] = $value;
+                    }
                 }
             }
             
