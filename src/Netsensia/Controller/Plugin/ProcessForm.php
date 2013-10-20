@@ -49,24 +49,33 @@ class ProcessForm extends AbstractPlugin
                     $modelData
                 );
                 
-                if (isset($data['password'])) {
-                    $userService = 
-                        $this->controller->getServiceLocator()->get('Netsensia\Service\UserService');
+                $isValid = true;
+                if (isset($data['password']) && isset($data['confirmpassword'])) {
                     
-                    $data['password'] = $userService->encryptPassword($data['password']);
+                    if ($data['password'] == $data['confirmpassword']) {
+                        $userService = 
+                            $this->controller->getServiceLocator()->get('Netsensia\Service\UserService');
+                        
+                        $data['password'] = $userService->encryptPassword($data['password']);
+                    } else {
+                        unset($data['password']);
+                    }
+                    
                     unset($data['confirmpassword']);
                 }
                                 
-                $tableModel->setData($data);
-        
-                $tableModel->save();
-                
-                $this->controller->flashMessenger()->addSuccessMessage('Your details have been saved');
-                $router = $sl->get('router');
-                $request = $sl->get('request');
-                
-                $routeMatch = $router->match($request);
-                $this->controller->redirect()->toRoute($routeMatch->getMatchedRouteName());
+                if ($isValid) {
+                    $tableModel->setData($data);
+            
+                    $tableModel->save();
+                    
+                    $this->controller->flashMessenger()->addSuccessMessage('Your details have been saved');
+                    $router = $sl->get('router');
+                    $request = $sl->get('request');
+                    
+                    $routeMatch = $router->match($request);
+                    $this->controller->redirect()->toRoute($routeMatch->getMatchedRouteName());
+                }
             }
         
         } else {
