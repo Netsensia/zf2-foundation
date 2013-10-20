@@ -276,7 +276,7 @@ class DatabaseTableModel
             $this->setData($data);
             
             foreach ($this->relations as $column => $relation) {
-                if ($this->data[$column] != '') {
+                if ($this->data[$column] == '') {
                     $model = $this->loadModel(
                         $relation['model'],
                         $this->data[$column]
@@ -284,8 +284,10 @@ class DatabaseTableModel
     
                     $modelData = $model->getData();
                     
-                    foreach ($modelData as $field => $value) {
-                        $this->data[$column . '_' . $relation['model'] . '_' . $field] = $value;
+                    if (is_array($modelData)) {
+                        foreach ($modelData as $field => $value) {
+                            $this->data[$column . '_' . $relation['model'] . '_' . $field] = $value;
+                        }
                     }
                 }
             }
