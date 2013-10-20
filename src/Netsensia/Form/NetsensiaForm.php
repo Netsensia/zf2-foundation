@@ -264,6 +264,20 @@ class NetsensiaForm extends Form
         $this->add($text);
     }
     
+    public function addTextArea($options)
+    {
+        if (is_array($options)) {
+            $options['type'] = 'textarea';
+        } else {
+            $options = [ 
+                'name' => $options,
+                'type' => 'textarea', 
+            ];
+        }
+        
+        $this->addText($options);
+    }    
+    
     public function addPasswordPair()
     {
         $this->addText(

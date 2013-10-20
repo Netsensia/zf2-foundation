@@ -276,7 +276,7 @@ class DatabaseTableModel
             $this->setData($data);
             
             foreach ($this->relations as $column => $relation) {
-                if ($this->data[$column] == '') {
+                if ($this->data[$column] != '') {
                     $model = $this->loadModel(
                         $relation['model'],
                         $this->data[$column]
