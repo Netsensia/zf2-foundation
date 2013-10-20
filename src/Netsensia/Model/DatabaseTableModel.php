@@ -8,14 +8,14 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use PDO;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Netsensia\Provider\ProvidesConnection;
 use Netsensia\Provider\ProvidesServiceLocator;
+use Netsensia\Provider\ProvidesModels;
 
 class DatabaseTableModel 
     implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 {
-    use ProvidesServiceLocator, ProvidesConnection;
+    use ProvidesServiceLocator, ProvidesConnection, ProvidesModels;
     
     /**
      * @var string $tableName
@@ -130,8 +130,31 @@ class DatabaseTableModel
         return $this->inputFilter;
     }
     
+    public function createRelations()
+    {
+    	$relations = [];
+    	foreach ($this->data as $key => $value) {
+    		if (strpos($key, '_') !== false) {
+    			$parts = explode('_', $key);
+    			$relations[$parts[0] . '_' . $parts[1]][$parts[2]] = $value;
+    			unset($this->data[$key]);
+    		}
+    	}
+    	 
+    	foreach ($relations as $columnAndModelName => $fieldData) {
+    		$parts = explode('_', $columnAndModelName);
+    		$columnName = $parts[0];
+    		$modelName  = $parts[1];
+    		$model = $this->newModel($modelName);
+    		$model->setData($fieldData);
+    		$this->data[$columnName] = $model->create();
+    	}
+    }
+    
     public function create()
     {
+    	$this->createRelations();
+    	
         $data = $this->getPrimaryKey() + $this->data;
         
         $sql = 'INSERT INTO ' . $this->getTableName() . ' (';
@@ -160,6 +183,8 @@ class DatabaseTableModel
     
     public function save()
     {
+    	$this->createRelations();
+    	
         $sql = 'UPDATE ' . $this->getTableName() . ' SET ';
         foreach ($this->data as $key => $value) {
             $sql .= $key . '= :' . $key . ',';
@@ -202,7 +227,8 @@ class DatabaseTableModel
         
         if (count($this->primaryKey) != 1) {
             throw new Exception(
-                "Shortcut method getId() may only be used on models with single-column primary keys"
+                'Shortcut method getId() may only be used ' .
+            	'on models with single-column primary keys'
             );
         }
         
@@ -232,7 +258,8 @@ class DatabaseTableModel
     
         $query->execute($map);
     
-        if ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        if ($data) {
             $this->setData($data);
             return true;
         }

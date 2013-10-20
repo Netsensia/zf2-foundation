@@ -78,7 +78,7 @@ class RegisterController extends NetsensiaActionController
                     array(
                         'email' => $data['email'],
                         'name' => $data['username'],
-                        'isocountry_fromregip' => $isoCode,
+                        'isocountryfromregip' => $isoCode,
                         'createddate' => date('Y/m/d H:i:s'),
                         'password' => $password,
                         'regipaddress' => $remoteAddress,
