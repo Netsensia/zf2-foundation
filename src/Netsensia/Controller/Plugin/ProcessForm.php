@@ -42,17 +42,6 @@ class ProcessForm extends AbstractPlugin
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
                     }
-                    
-                    if (strpos($modelField, 'addresslineone') !== false) {
-                        $addressColumns[] = str_replace('addresslineone', '', $modelField);
-                    }
-                }
-                
-                foreach ($addressColumns as $addressColumn) {
-                	$modelData = $this->saveAddress(
-                	    $modelData, 
-                	    $addressColumn
-                    );
                 }
                 
                 $data = array_merge(
@@ -88,35 +77,5 @@ class ProcessForm extends AbstractPlugin
         
     }
     
-    private function saveAddress(
-        $modelData,
-        $addressColumn
-    )
-    {
-    	$sl = $this->controller->getServiceLocator();
-    	
-    	$addressModel = $sl->get('AddressModel');
-    	$addressModel->init();
-    	
-    	$addressData['address1']   = $modelData[$addressColumn . 'addresslineone'];
-    	$addressData['address2']   = $modelData[$addressColumn . 'addresslinetwo'];
-    	$addressData['town'] 	   = $modelData[$addressColumn . 'addresstown'];
-    	$addressData['county'] 	   = $modelData[$addressColumn . 'addresscounty'];
-    	$addressData['countryid']  = $modelData[$addressColumn . 'addresscountryid'];
-    	$addressData['postcode']   = $modelData[$addressColumn . 'addresspostcode'];
-    	
-    	$addressModel->setData($addressData);
-    	$modelData[$addressColumn] = $addressModel->create();
-
-    	unset($modelData[$addressColumn . 'addresslineone']);
-    	unset($modelData[$addressColumn . 'addresslinetwo']);
-    	unset($modelData[$addressColumn . 'addresslinethree']);
-    	unset($modelData[$addressColumn . 'addresstown']);
-    	unset($modelData[$addressColumn . 'addresscounty']);
-    	unset($modelData[$addressColumn . 'addresscountryid']);
-    	unset($modelData[$addressColumn . 'addresspostcode']);
-    	    	
-    	return $modelData;
-    }
 }
 

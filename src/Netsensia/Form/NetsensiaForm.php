@@ -41,56 +41,57 @@ class NetsensiaForm extends Form
         $this->add($submitButton);
     }
     
-    public function addAddress($prefix)
+    public function addRelation($options)
     {
-    	$this->addText(
-    	    [
-    	    'name'=>$prefix . 'address-line-one', 
-    	    'label' => 'Address 1',
-    	    'icon' => 'home',
-            ]
-        );
-    	$this->addText(
-    	    [
-    	    'name'=>$prefix . 'address-line-two',
-    	    'label' => 'Address 2',
-    	    'icon' => 'home',
-    	    ]
-    	);
-    	$this->addText(
-    	    [
-    	    'name'=>$prefix . 'address-line-three',
-    	    'label' => 'Address 3',
-    	    'icon' => 'home',
-    	    ]
-    	);
-    	$this->addText(
-    	    [
-    	    'name'=>$prefix . 'address-town',
-    	    'label' => 'Town',
-    	    'icon' => 'home',
-    	    ]
-    	);
-    	$this->addText(
-    	    [
-    	    'name'=>$prefix . 'address-county',
-    	    'label' => 'County',
-    	    'icon' => 'home',
-    	    ]
-    	);
-    	$this->addText(
-    	    [
-    	    'name'=>$prefix . 'address-postcode',
-    	    'label' => 'Postcode',
-    	    'icon' => 'home',
-    	    ]
-    	);
-    	$this->addSelect(
+		foreach ($options['fields'] as $field) {
+			// Model field, referenced table, referenced table field
+			$field['name'] = $options['column'] . '_' . $options['table'] . '_' . $field['name'];
+			if (!isset($field['icon'])) {
+				$field['icon'] = $options['icon'];
+			}
+			if (!isset($field['type'])) {
+				$field['type'] = 'text';
+			}
+			switch ($field['type']) {
+				case 'text' : $this->addText($field);
+					break;
+				case 'select' : $this->addSelect($field);
+					break;
+			}
+		}
+    }
+    
+    public function addAddress($column)
+    {
+    	$this->addRelation(
     		[
-    		'name'=>$prefix . 'address-country',
-    	    'label'=>'Country',
-    		'table'=>'country',
-    	    'icon'=>'home',
+			'column' => $column,
+    		'table'  => 'address',
+    		'icon'   => 'home',
+    		'fields' => [
+	    			[
+	    	    	'name'=>'address-1', 
+	            	],
+	    			[
+	    			'name'=>'address-2',
+	    			],
+	    			[
+	    			'name'=>'address-3',
+	    			],
+	    			[
+	    			'name'=>'town',
+	    			],
+	    			[
+	    			'name'=>'county',
+	    			],
+	    			[
+	    			'name'=>'postcode',
+	    			],
+	    			[
+	    			'name'=>'country',
+	    			'type'=>'select',
+	    			],
+    			]
     		]
     	);
     }
@@ -102,12 +103,15 @@ class NetsensiaForm extends Form
             $options = [ 'name' => $options ];
         }
         
+        $parts = explode('_', $options['name']);
+        $ultimateName = $parts[count($parts)-1];
+        
         $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
-
+        
         if (isset($options['label'])) {
             $label = $options['label'];
         } else {
-            $label = ucwords(str_replace('-', ' ', $options['name']));
+            $label = ucwords(str_replace('-', ' ', $ultimateName));
         }
         
         if (isset($options['icon'])) {
@@ -125,7 +129,7 @@ class NetsensiaForm extends Form
         if (isset($options['table'])) {
             $table = $options['table'];
         } else {
-            $table = $options['name'];
+            $table = $ultimateName;
         }
         
         if (isset($options['tableKey'])) {
@@ -146,7 +150,7 @@ class NetsensiaForm extends Form
         if (!$this->dbAdapter) {
             throw new \Exception('DB Adapter is not set');
         }
-        
+
         $table = new TableGateway($table, $this->dbAdapter);
         
         $rowset = $table->select();
@@ -222,7 +226,9 @@ class NetsensiaForm extends Form
         if (isset($options['label'])) {
             $label = $options['label'];
         } else {
-            $label = ucwords(str_replace('-', ' ', $options['name']));
+        	$parts = explode('_', $options['name']);
+        	$label = $parts[count($parts)-1];
+            $label = ucwords(str_replace('-', ' ', $label));
         }
         
         if (isset($options['type'])) {
