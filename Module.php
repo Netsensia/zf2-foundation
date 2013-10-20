@@ -55,6 +55,9 @@ class Module implements AutoloaderProviderInterface
                 'UserModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
                     $instance = new \Application\Model\User();
                     $instance->setServiceLocator($sl);
+                    
+                    $instance->setRelation('addressid', 'address');
+                    
                     return $instance;
                 },
                 'FeedbackModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {

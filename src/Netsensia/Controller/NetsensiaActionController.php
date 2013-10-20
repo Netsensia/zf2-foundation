@@ -47,7 +47,7 @@ class NetsensiaActionController extends AbstractActionController
         }
         if ($flashMessenger->hasErrorMessages()) {
             foreach ($flashMessenger->getErrorMessages() as $message) {
-                $messages[] = $message . '##error';
+                $messages[] = $message . '##danger';
             }
         }
         return $messages;

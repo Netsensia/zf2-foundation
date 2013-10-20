@@ -18,6 +18,11 @@ class DatabaseTableModel
     use ProvidesServiceLocator, ProvidesConnection, ProvidesModels;
     
     /**
+     * @var array $relations
+     */
+    protected $relations = [];
+    
+    /**
      * @var string $tableName
      */
     private $tableName;
@@ -54,6 +59,13 @@ class DatabaseTableModel
     protected function addInputFilter($def)
     {
         $this->inputFilter->add($this->inputFactory->createInput($def));
+    }
+    
+    public function setRelation($column, $model) 
+    {
+        $this->relations[$column] = [
+            'model' => $model,
+        ];
     }
     
     /**
@@ -259,8 +271,23 @@ class DatabaseTableModel
         $query->execute($map);
     
         $data = $query->fetch(PDO::FETCH_ASSOC);
+        
         if ($data) {
             $this->setData($data);
+            
+            foreach ($this->relations as $column => $relation) {
+                $model = $this->loadModel(
+                    $relation['model'],
+                    $this->data[$column]
+                );
+            
+                $modelData = $model->getData();
+            
+                foreach ($modelData as $field => $value) {
+                    $this->data[$column . '_' . $relation['model'] . '_' . $field] = $value;
+                }
+            }
+            
             return true;
         }
         
