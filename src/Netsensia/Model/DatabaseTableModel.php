@@ -11,11 +11,14 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Netsensia\Provider\ProvidesConnection;
 use Netsensia\Provider\ProvidesServiceLocator;
 use Netsensia\Provider\ProvidesModels;
+use Netsensia\Model\Exception\KeyNotFoundException;
 
-class DatabaseTableModel 
+abstract class DatabaseTableModel 
     implements InputFilterAwareInterface, ServiceLocatorAwareInterface
 {
     use ProvidesServiceLocator, ProvidesConnection, ProvidesModels;
+
+    abstract public function init($id);
     
     /**
      * @var array $relations
@@ -35,7 +38,7 @@ class DatabaseTableModel
     /**
      * @var array $data
      */
-    private $data;
+    private $data = [];
 
     /**
      * @var Zend\InputFilter\InputFilter $inputFilter
@@ -106,7 +109,7 @@ class DatabaseTableModel
     /**
      * @param array $data
      */
-    public function setData($data)
+    public function setData(array $data)
     {
         $this->data = $data;        
     }
@@ -121,6 +124,12 @@ class DatabaseTableModel
      */
     public function get($key)
     {
+        if (!isset($this->data[$key])) {
+            throw new KeyNotFoundException(
+                'Data key "' . $key . '" is ' .
+                'unavailable in ' . print_r($this->data, true)
+            );
+        }
         return $this->data[$key];
     }
     
@@ -223,7 +232,9 @@ class DatabaseTableModel
     
     public function isPopulated()
     {
-        return $this->getPrimaryKey() != null;
+        $pk = $this->getPrimaryKey();
+        
+        return ($pk != null && reset($pk) != null);
     }
     
     /**
