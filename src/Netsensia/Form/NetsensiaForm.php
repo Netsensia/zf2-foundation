@@ -215,6 +215,28 @@ class NetsensiaForm extends Form
         $this->addText($options);
     }
     
+    public function addDate($options)
+    {
+        if (!is_array($options)) {
+            $options = [ 'name' => $options ];
+        }
+
+        $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
+        
+        if (!isset($options['label'])) {
+            $parts = explode('_', $options['name']);
+            $label = $parts[count($parts)-1];
+            $label = ucwords(str_replace('-', ' ', $label));
+            
+            $options['label'] = $label;
+        }
+        
+        $options['icon'] = 'calendar';
+        $options['class'] = $this->defaultClass . ' date-entry';
+        
+        $this->addText($options);
+    }
+    
     public function addText($options)
     {
         if (!is_array($options)) {
