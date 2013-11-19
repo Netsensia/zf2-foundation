@@ -11,6 +11,11 @@ namespace Netsensia;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
+use Zend\Log\Writer\FirePhp;
+use Zend\Log\Writer\FirePhp\FirePhpBridge;
+use Zend\Log\Writer\Stream;
+use Zend\Log\Logger;
+    
 
 class Module implements AutoloaderProviderInterface
 {
@@ -52,6 +57,19 @@ class Module implements AutoloaderProviderInterface
     {
         return [
             'factories' => array(
+                'Zend\Log' => function($sm) {
+                    $log = new Logger();
+ 
+                    $firephp_writer = new FirePhp(new FirePhpBridge(\FirePHP::getInstance(true)));
+                    $log->addWriter($firephp_writer);
+     
+                    $stream_writer = new Stream('./data/log/application.log');
+                    $log->addWriter($stream_writer);
+     
+                    $log->info('FirePHP logging enabled');
+     
+                    return $log;
+                },
                 'UserModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
                     $instance = new \Application\Model\User();
                     $instance->setServiceLocator($sl);
