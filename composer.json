@@ -20,7 +20,6 @@
         "cloud-solutions/zend-sentry" : "0.3.1",
         "php" : ">=5.4",
         "mockery/mockery" : "0.8.0",
-        "firephp/firephp-core": "dev-master",
         "zendframework/zendframework" : ">=2.2.0rc3"
     },
     "require-dev": {

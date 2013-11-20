@@ -60,13 +60,10 @@ class Module implements AutoloaderProviderInterface
                 'Zend\Log' => function($sm) {
                     $log = new Logger();
  
-                    $firephp_writer = new FirePhp(new FirePhpBridge(\FirePHP::getInstance(true)));
-                    $log->addWriter($firephp_writer);
-     
                     $stream_writer = new Stream('./data/log/application.log');
                     $log->addWriter($stream_writer);
      
-                    $log->info('FirePHP logging enabled');
+                    $log->info('Logging started...');
      
                     return $log;
                 },
