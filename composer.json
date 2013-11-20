@@ -1,41 +1,44 @@
 {
-    "name": "netsensia/zf2-foundation",
-    "type": "library",
-    "description": "Foundation classes for ZF2 applications",
-    "keywords": ["zf2"],
-    "homepage": "http://github.com/netsensia/zf2-foundation",
-    "license": "New BSD License",
-    "authors": [
-        {
-            "name": "Chris Moreton",
-            "email": "chris@netsensia.com",
-            "homepage": "http://www.netsensia.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "raven/raven" : ">=0.2.0",
-        "geoip2/geoip2" : "0.2.*",
-        "zendframework/zendservice-recaptcha" : "2.*",
-        "cloud-solutions/zend-sentry" : "0.3.1",
-        "php" : ">=5.4",
-        "mockery/mockery" : "0.8.0",
-        "zendframework/zendframework" : ">=2.2.0rc3"
-    },
-    "require-dev": {
-        "behat/mink-selenium2-driver" : "*",
-        "behat/behat" : "2.4.*@stable",
-        "behat/mink" : "1.4@stable",
-        "behat/mink-extension" : "*",
-        "behat/mink-goutte-driver" : "*",
-        "firephp/firephp-core": "dev-master"
-    },    
-    "autoload": {
-        "psr-0": {
-            "Netsensia": "src/"
-        },
-        "classmap": [
-            "./Module.php"
-        ]
-    }
+	"name" : "netsensia/zf2-foundation",
+	"description" : "Foundation classes for ZF2 applications",
+	"type" : "library",
+	"authors" : [{
+			"name" : "Chris Moreton",
+			"email" : "chris@netsensia.com",
+			"homepage" : "http://www.netsensia.com",
+			"role" : "Developer"
+		}
+	],
+	"keywords" : [
+		"zf2"
+	],
+	"homepage" : "http://github.com/netsensia/zf2-foundation",
+	"license" : [
+		"New BSD License"
+	],
+	"require" : {
+		"raven/raven" : ">=0.2.0",
+		"geoip2/geoip2" : "0.2.*",
+		"zendframework/zendservice-recaptcha" : "2.*",
+		"cloud-solutions/zend-sentry" : "0.3.1",
+		"php" : ">=5.4",
+		"mockery/mockery" : "0.8.0",
+		"firephp/firephp-core" : "dev-master",
+		"zendframework/zendframework" : ">=2.2.0rc3"
+	},
+	"require-dev" : {
+		"behat/mink-selenium2-driver" : "*",
+		"behat/behat" : "2.4.*@stable",
+		"behat/mink" : "1.4@stable",
+		"behat/mink-extension" : "*",
+		"behat/mink-goutte-driver" : "*"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Netsensia" : "src/"
+		},
+		"classmap" : [
+			"./Module.php"
+		]
+	}
 }
