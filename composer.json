@@ -28,7 +28,7 @@
         "behat/behat" : "2.4.*@stable",
         "behat/mink" : "1.4@stable",
         "behat/mink-extension" : "*",
-        "behat/mink-goutte-driver" : "*",
+        "behat/mink-goutte-driver" : "*"
     },    
     "autoload": {
         "psr-0": {
